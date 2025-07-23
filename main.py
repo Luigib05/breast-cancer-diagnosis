@@ -20,7 +20,7 @@ model = train_logistic_regression(X_train, y_train)
 y_pred = evaluate_model(model, X_test, y_test)
 
 # Plot confusion matrix
-#plot_confusion_matrix(y_test, y_pred)
+plot_confusion_matrix(y_test, y_pred)
 
 
 from src.model_training import train_random_forest, evaluate_model, plot_confusion_matrix
@@ -32,7 +32,7 @@ rf_model = train_random_forest(X_train, y_train)
 rf_predictions = evaluate_model(rf_model, X_test, y_test)
 
 # Plot confusion matrix
-#plot_confusion_matrix(y_test, rf_predictions)
+plot_confusion_matrix(y_test, rf_predictions)
 
 from src.model_training import tune_random_forest, evaluate_model, plot_confusion_matrix
 
@@ -42,13 +42,13 @@ best_rf_model = tune_random_forest(X_train, y_train)
 # Evaluate
 print("\nTuned Random Forest Results:")
 best_rf_predictions = evaluate_model(best_rf_model, X_test, y_test)
-#plot_confusion_matrix(y_test, best_rf_predictions)
+plot_confusion_matrix(y_test, best_rf_predictions)
 
 
-#from src.save_model import save_model
+from src.save_model import save_model
 
 # Save the trained logistic regression model
-#save_model(model)
+save_model(model)
 
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from src.save_model import save_metrics

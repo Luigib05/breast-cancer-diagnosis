@@ -27,41 +27,76 @@ It uses the **Wisconsin Breast Cancer Diagnostic (WBCD)** dataset and follows a 
 
 ## Project Structure
 
-breast-cancer-project/
+Breast_cancer_project/
 │
-├── data/ # Dataset files (.data, .names)
-├── notebook/ # Jupyter notebooks (EDA, experiments)
-├── src/ # Python modules for loading and processing data
-├── .venv/ # Virtual environment (excluded)
-├── main.py # Entry point to run the pipeline
-├── requirements.txt # Dependencies
-└── README.md # Project description
+├── app.py                       
+├── models/
+│   └── logistic_regression_model.pkl
+├── data/
+│   └── wdbc.data
+├── src/
+│   ├── model_training.py
+│   ├── preprocessing.py
+│   ├── save_model.py
+│   └── ...
+├── tests/
+│   ├── test_load_data.py
+│   └── test_model_training.py
+├── requirements.txt
+└── README.md
 
+## Steps Completed
 
----
+### 1. Exploratory Data Analysis (EDA)
+- Verified data completeness (no missing values)
+- Examined class distribution (benign vs malignant)
+- Visualized feature distributions by class
+- Computed and visualized feature correlations
+- Identified top predictors with |r| > 0.4
 
-## How to Run
+### 2. Data Preprocessing
+- Selected 10 most correlated features
+- Applied feature scaling with `StandardScaler`
 
-1. Clone the repository:
-```bash
-git clone https://github.com/your-username/breast-cancer-project.git
-cd breast-cancer-project
+### 3. Model Training & Evaluation
+- **Logistic Regression** (baseline):  
+  Accuracy: **96.5%**  
+  F1-score: **95.2%**
 
-2. Create and activate virtual environment:
+- **Random Forest (Tuned)**:  
+  Accuracy: 95.9%  
+  F1-score: 94.3%
 
-python -m venv .venv
-.venv\Scripts\activate      # On Windows
-source .venv/bin/activate  # On macOS/Linux
+- Final model selected: **Logistic Regression** (better recall & simplicity)
 
-3. Install dependencies:
+### 4. Model Saving & Metrics Logging
+- Model saved as 'logistic_regression_model.pkl' using `joblib`
+- Evaluation metrics stored in `evaluation_metrics.txt`
 
-pip install -r requirements.txt
+### 5. Deployment (Local)
+- Built an MVP interactive web app using **Streamlit**
+- Allows user input for 10 features via sliders
+- Displays model prediction and probability
 
-4. Run the pipeline:
+## 🚀 Run the App Locally
 
-python main.py
+1. Create and activate virtual environment
+2. Install dependencies:
+   bash
+   pip install -r requirements.txt
 
-License:
+## Run the app
+
+streamlit run app.py
+
+## Test
+
+To ensure that key scripts (data loading, training) work correctly.
+to run: 
+ bash
+ python -m unittest test/test_load_data.py
+
+## License:
 
 This project is for educational and research purposes only
 
